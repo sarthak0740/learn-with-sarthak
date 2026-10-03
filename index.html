@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Learn With Sarthak - Computer Science & Robotics Institute</title>
+  <meta name="description" content="Premier modern dark-tech and robotics-style computer science college offering hands-on education in programming, AI, robotics, and emerging technologies." />
+
+  <!-- Google Fonts: Syne, Plus Jakarta Sans, JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Syne:wght@600;700;800&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Syne', 'sans-serif'],
+            body: ['Plus Jakarta Sans', 'sans-serif'],
+            mono: ['JetBrains Mono', 'monospace'],
+          },
+          colors: {
+            cyberDark: '#07090e',
+            cyberCard: '#0d121f',
+            cyberBorder: '#1e293b',
+            electric: '#00f0ff',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #07090e;
+      color: #f1f5f9;
+    }
+    h1, h2, h3, h4, .brand-font {
+      font-family: 'Syne', sans-serif;
+    }
+    .cyber-grid {
+      background-size: 32px 32px;
+      background-image: 
+        linear-gradient(to right, rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+    }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #07090e; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #0284c7; }
+  </style>
+</head>
+
+<body class="bg-[#07090e] text-slate-100 antialiased selection:bg-cyan-500/30 selection:text-cyan-200">
+
+  <!-- TOP NAVIGATION BAR -->
+  <header class="sticky top-0 z-50 w-full border-b border-sky-950/60 bg-[#07090e]/90 backdrop-blur-md">
+    <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+      <!-- Zone 1: Brand Wordmark -->
+      <a href="#home" class="flex items-center gap-2.5 text-white hover:text-cyan-300 transition-colors">
+        <div class="flex h-9 w-9 items-center justify-center rounded border border-cyan-500/40 bg-cyan-950/40 text-cyan-400 shadow-[0_0_12px_rgba(6,182,212,0.25)]">
+          <i data-lucide="cpu" class="w-5 h-5"></i>
+        </div>
+        <span class="font-display text-lg font-bold tracking-tight">Learn With Sarthak</span>
+      </a>
+
+      <!-- Zone 2: Navigation Links -->
+      <nav class="hidden md:flex items-center gap-7 text-sm font-medium text-slate-300">
+        <a href="#courses" class="hover:text-cyan-400 transition-colors">Courses</a>
+        <a href="#about" class="hover:text-cyan-400 transition-colors">About College</a>
+        <a href="#virtual-lab" class="hover:text-cyan-400 transition-colors flex items-center gap-1.5">
+          <span>Robotics Lab</span>
+          <span class="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse"></span>
+        </a>
+        <a href="#projects" class="hover:text-cyan-400 transition-colors">Student Showcase</a>
+        <a href="#faculty" class="hover:text-cyan-400 transition-colors">Mentorship</a>
+        <a href="#admissions" class="hover:text-cyan-400 transition-colors">Admissions</a>
+      </nav>
+
+      <!-- Zone 3: Actions -->
+      <div class="flex items-center gap-3">
+        <button onclick="openEnrollModal('Foundations of Computer Programming')" class="px-4 py-2 text-xs font-semibold text-white bg-gradient-to-r from-sky-600 to-cyan-500 hover:from-sky-500 hover:to-cyan-400 rounded-md transition-all shadow-[0_0_15px_rgba(14,165,233,0.3)]">
+          Enroll Now
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- 1. HERO SECTION -->
+  <section id="home" class="relative overflow-hidden border-b border-sky-950/50 bg-[#07090e] pt-12 pb-20 md:pt-16 md:pb-28">
+    <canvas id="circuit-canvas" class="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-60"></canvas>
+    <div class="pointer-events-none absolute inset-0 cyber-grid opacity-30"></div>
+
+    <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
+        <div class="lg:col-span-7">
+          <div class="mb-4 inline-flex items-center gap-2 border border-cyan-500/30 bg-cyan-950/30 px-3.5 py-1.5 rounded-full text-xs font-mono text-cyan-300">
+            <span class="flex h-2 w-2 rounded-full bg-cyan-400 animate-pulse"></span>
+            <span>Computer Science & Robotics College</span>
+          </div>
+
+          <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight text-white uppercase leading-tight">
+            LEARN WITH <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-400 via-cyan-300 to-teal-300">SARTHAK</span>
+          </h1>
+
+          <p class="mt-2 font-display text-xl sm:text-2xl font-semibold tracking-wide text-cyan-400 italic">
+            Computer Science & Technology
+          </p>
+
+          <div class="mt-4 flex items-center gap-3">
+            <span class="h-0.5 w-8 bg-cyan-400"></span>
+            <p class="font-display text-2xl sm:text-3xl font-bold tracking-tight text-slate-100">
+              Learn. Build. Innovate.
+            </p>
+          </div>
+
+          <p class="mt-4 max-w-2xl text-base sm:text-lg text-slate-300 leading-relaxed">
+            Learn computer science through practical projects, programming, technology, AI and robotics.
+          </p>
+
+          <div class="mt-8 flex flex-wrap items-center gap-3.5">
+            <a href="#courses" class="inline-flex items-center gap-2 px-6 py-3 text-sm font-semibold text-white bg-gradient-to-r from-sky-600 via-cyan-600 to-teal-600 rounded-md shadow-[0_0_20px_rgba(14,165,233,0.35)]">
+              <span>Explore Courses</span>
+              <i data-lucide="arrow-right" class="w-4 h-4"></i>
+            </a>
+
+            <a href="#about" class="px-5 py-3 text-sm font-medium text-slate-200 border border-slate-700 bg-slate-900/80 rounded-md hover:border-cyan-500">
+              About Us
+            </a>
+
+            <a href="#virtual-lab" class="inline-flex items-center gap-2 px-4 py-3 text-xs font-mono text-cyan-300 border border-cyan-800 bg-cyan-950/20 rounded-md">
+              <i data-lucide="bot" class="w-4 h-4 text-cyan-400"></i>
+              <span>Virtual Lab Simulator</span>
+            </a>
+          </div>
+
+          <div class="mt-10 flex flex-wrap items-center gap-x-3 gap-y-2 text-xs font-mono text-slate-400">
+            <span class="text-slate-300">C · C++ · Python · Java · JavaScript</span>
+            <span class="text-slate-600">·</span>
+            <span class="text-slate-300">ROS 2 & Kinematics</span>
+            <span class="text-slate-600">·</span>
+            <span class="text-cyan-400">85% Hardware Lab Work</span>
+          </div>
+        </div>
+
+        <div class="lg:col-span-5">
+          <div class="rounded-xl border border-sky-900/60 bg-slate-900/80 p-3 shadow-2xl backdrop-blur-md">
+            <div class="flex items-center justify-between border-b border-slate-800 pb-2 text-[11px] font-mono text-slate-400">
+              <span class="flex items-center gap-2">
+                <span class="h-2 w-2 rounded-full bg-emerald-400"></span>
+                <span>WORKBENCH // SECTOR-01</span>
+              </span>
+              <span class="text-cyan-400">ACTIVE TELEMETRY</span>
+            </div>
+            <div class="mt-3 bg-slate-950 p-4 rounded text-xs font-mono space-y-2">
+              <div class="flex justify-between text-slate-400">
+                <span>Hardware Ratio:</span>
+                <span class="text-white font-bold">85% Labs / 15% Theory</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Microcontroller Kits:</span>
+                <span class="text-cyan-300">ESP32 + STM32 + LiDAR</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Robotics Framework:</span>
+                <span class="text-emerald-400 font-bold">ROS 2 Humble + Gazebo</span>
+              </div>
+              <div class="flex justify-between text-slate-400">
+                <span>Alumni Success Rate:</span>
+                <span class="text-amber-400">98% In Tech & Research</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2. ABOUT THE COLLEGE -->
+  <section id="about" class="border-b border-sky-950/50 bg-[#080b12] py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold uppercase text-white">
+          About Learn With Sarthak
+        </h2>
+        <div class="mt-4 mx-auto h-0.5 w-16 bg-cyan-400"></div>
+        <p class="mt-5 text-lg text-slate-300">
+          Learn With Sarthak is a computer science learning institution focused on developing practical programming, technology and problem-solving skills.
+        </p>
+      </div>
+
+      <!-- The 4 Core Cards -->
+      <div class="mt-14 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
+        <div class="rounded-lg border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-2xl mb-3">🎓</div>
+          <h3 class="font-display text-lg font-bold text-white">Quality Learning</h3>
+          <p class="mt-2 text-sm text-slate-400">Simple and effective computer science education.</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-2xl mb-3">💻</div>
+          <h3 class="font-display text-lg font-bold text-white">Practical Skills</h3>
+          <p class="mt-2 text-sm text-slate-400">Learn by building real projects.</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-2xl mb-3">🤖</div>
+          <h3 class="font-display text-lg font-bold text-white">Future Technology</h3>
+          <p class="mt-2 text-sm text-slate-400">Explore AI, robotics and emerging technologies.</p>
+        </div>
+
+        <div class="rounded-lg border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-2xl mb-3">🚀</div>
+          <h3 class="font-display text-lg font-bold text-white">Career Focused</h3>
+          <p class="mt-2 text-sm text-slate-400">Develop skills useful for higher education and careers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. COURSES SECTION -->
+  <section id="courses" class="border-b border-sky-950/50 bg-[#07090e] py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <h2 class="font-display text-3xl sm:text-5xl font-extrabold uppercase text-white">
+          Courses
+        </h2>
+        <div class="mt-4 mx-auto h-0.5 w-16 bg-cyan-400"></div>
+        <p class="mt-5 text-base sm:text-lg text-slate-300">
+          Futuristic course modules covering low-level code, web applications, autonomous robotics, and AI.
+        </p>
+      </div>
+
+      <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Programming -->
+        <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-xs font-mono text-cyan-400">12 WEEKS · 72 LAB HOURS</div>
+          <h3 class="mt-2 font-display text-2xl font-bold text-white">💻 Programming Foundations</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Master memory management, pointers, object-oriented systems, and asynchronous runtimes.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-mono text-cyan-300">
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">C</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">C++</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">Python</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">Java</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">JavaScript</span>
+          </div>
+          <button onclick="openEnrollModal('Programming Foundations')" class="mt-6 w-full py-2 text-xs font-semibold text-white bg-slate-800 hover:bg-cyan-600 rounded">
+            Enroll in Programming
+          </button>
+        </div>
+
+        <!-- Web Development -->
+        <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-xs font-mono text-cyan-400">14 WEEKS · 90 LAB HOURS</div>
+          <h3 class="mt-2 font-display text-2xl font-bold text-white">🌐 Modern Web Development</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Build high-performance web systems from first-principle semantic layouts to production React apps.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-mono text-cyan-300">
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">HTML</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">CSS</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">JavaScript</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">React</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">Node.js</span>
+          </div>
+          <button onclick="openEnrollModal('Modern Web Development')" class="mt-6 w-full py-2 text-xs font-semibold text-white bg-slate-800 hover:bg-cyan-600 rounded">
+            Enroll in Web Dev
+          </button>
+        </div>
+
+        <!-- Robotics & Embedded -->
+        <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-xs font-mono text-cyan-400">16 WEEKS · 110 LAB HOURS</div>
+          <h3 class="mt-2 font-display text-2xl font-bold text-white">🤖 Robotics, Kinematics & Embedded</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Program microcontrollers, wire sensors, calculate forward/inverse kinematics, and deploy ROS 2 nodes.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-mono text-cyan-300">
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">ROS 2</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">Arduino / C++</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">ESP32</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">LiDAR & Kinematics</span>
+          </div>
+          <button onclick="openEnrollModal('Robotics & Embedded Systems')" class="mt-6 w-full py-2 text-xs font-semibold text-white bg-slate-800 hover:bg-cyan-600 rounded">
+            Enroll in Robotics
+          </button>
+        </div>
+
+        <!-- AI & Machine Learning -->
+        <div class="rounded-xl border border-slate-800 bg-slate-900/40 p-6 hover:border-cyan-500/50 transition-all">
+          <div class="text-xs font-mono text-cyan-400">14 WEEKS · 85 LAB HOURS</div>
+          <h3 class="mt-2 font-display text-2xl font-bold text-white">🧠 Applied AI & Computer Vision</h3>
+          <p class="mt-2 text-sm text-slate-300">
+            Train neural networks in PyTorch, implement OpenCV image filtering, and run real-time YOLO object detection.
+          </p>
+          <div class="mt-4 flex flex-wrap gap-2 text-xs font-mono text-cyan-300">
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">Python</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">PyTorch</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">OpenCV</span>
+            <span class="bg-cyan-950/40 px-2 py-1 rounded border border-cyan-800">YOLOv11</span>
+          </div>
+          <button onclick="openEnrollModal('Applied AI & Computer Vision')" class="mt-6 w-full py-2 text-xs font-semibold text-white bg-slate-800 hover:bg-cyan-600 rounded">
+            Enroll in AI
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. INTERACTIVE ROBOTIC ARM SIMULATOR -->
+  <section id="virtual-lab" class="border-b border-sky-950/50 bg-[#080b12] py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="mx-auto max-w-3xl text-center">
+        <div class="inline-flex items-center gap-2 border border-cyan-500/30 bg-cyan-950/30 px-3 py-1 rounded-full text-xs font-mono text-cyan-300">
+          <span>LIVE VIRTUAL LAB</span>
+        </div>
+        <h2 class="mt-3 font-display text-3xl sm:text-5xl font-extrabold uppercase text-white">
+          Robotic Arm Simulator
+        </h2>
+        <p class="mt-3 text-sm text-slate-300">
+          Directly manipulate joint angles and test inverse kinematics in your browser.
+        </p>
+      </div>
+
+      <div class="mt-12 rounded-xl border border-slate-800 bg-slate-950 p-6 grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <!-- Canvas -->
+        <div class="lg:col-span-7 bg-[#05070d] border border-slate-800 rounded p-2">
+          <canvas id="arm-canvas" height="340" class="w-full"></canvas>
+        </div>
+
+        <!-- Controls -->
+        <div class="lg:col-span-5 space-y-4">
+          <div>
+            <div class="flex justify-between text-xs font-mono">
+              <span class="text-slate-400">Base Joint (θ₁):</span>
+              <span id="val-base" class="text-cyan-400 font-bold">45°</span>
+            </div>
+            <input id="slider-base" type="range" min="0" max="180" value="45" class="w-full accent-cyan-400" />
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono">
+              <span class="text-slate-400">Shoulder Joint (θ₂):</span>
+              <span id="val-shoulder" class="text-cyan-400 font-bold">30°</span>
+            </div>
+            <input id="slider-shoulder" type="range" min="-45" max="90" value="30" class="w-full accent-cyan-400" />
+          </div>
+
+          <div>
+            <div class="flex justify-between text-xs font-mono">
+              <span class="text-slate-400">Elbow Joint (θ₃):</span>
+              <span id="val-elbow" class="text-cyan-400 font-bold">-35°</span>
+            </div>
+            <input id="slider-elbow" type="range" min="-90" max="45" value="-35" class="w-full accent-cyan-400" />
+          </div>
+
+          <div class="flex items-center justify-between p-3 border border-slate-800 rounded bg-slate-900">
+            <span class="text-xs font-semibold text-white">Claw Gripper</span>
+            <button id="btn-gripper" class="px-3 py-1 text-xs font-mono text-cyan-300 border border-cyan-800 bg-cyan-950/40 rounded">
+              Toggle Claw
+            </button>
+          </div>
+
+          <div class="flex gap-3 pt-2">
+            <button id="btn-automate" class="w-full py-2 text-xs font-bold text-white bg-gradient-to-r from-sky-600 to-cyan-500 rounded">
+              Run Pick & Place Demo
+            </button>
+            <button id="btn-reset" class="px-4 py-2 text-xs border border-slate-800 text-slate-300 rounded hover:text-white">
+              Reset
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. FOUNDER SPOTLIGHT -->
+  <section id="faculty" class="border-b border-sky-950/50 bg-[#07090e] py-20">
+    <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl mx-auto text-center">
+        <h2 class="font-display text-3xl sm:text-4xl font-extrabold uppercase text-white">
+          Meet Sarthak Joshi
+        </h2>
+        <p class="text-xs font-mono text-cyan-400 mt-1">FOUNDER & LEAD INSTRUCTOR</p>
+        <blockquote class="mt-6 p-4 border-l-4 border-cyan-400 bg-slate-900/60 text-slate-300 italic text-sm sm:text-base">
+          "True engineering is never learned from reading slides. It is forged by writing code that breaks, debugging at 2 AM, wiring microcontrollers with your own hands, and watching your creation move."
+        </blockquote>
+      </div>
+    </div>
+  </section>
+
+  <!-- 6. FOOTER -->
+  <footer class="border-t border-slate-800 bg-[#05070c] py-12 text-center text-xs font-mono text-slate-500">
+    <p>© 2026 Learn With Sarthak — Computer Science & Technology. All rights reserved.</p>
+  </footer>
+
+  <!-- ENROLLMENT MODAL -->
+  <div id="enroll-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+    <div class="w-full max-w-md rounded-xl border border-sky-900 bg-[#090d16] p-6 text-slate-100 shadow-2xl">
+      <div class="flex items-center justify-between border-b border-slate-800 pb-3">
+        <h3 class="font-display text-lg font-bold text-white">Admissions Registration</h3>
+        <button onclick="closeEnrollModal()" class="text-slate-400 hover:text-white">✕</button>
+      </div>
+
+      <form onsubmit="handleFormSubmit(event)" class="mt-4 space-y-3">
+        <div>
+          <label class="block text-xs font-mono text-slate-400">Course Selected:</label>
+          <input id="modal-course-input" type="text" readonly class="w-full mt-1 p-2 bg-slate-950 border border-slate-800 rounded text-xs font-mono text-cyan-300" />
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-400">Full Name *</label>
+          <input type="text" required placeholder="e.g. Rahul Sharma" class="w-full mt-1 p-2 bg-slate-950 border border-slate-800 rounded text-xs text-white" />
+        </div>
+        <div>
+          <label class="block text-xs font-mono text-slate-400">Email Address *</label>
+          <input type="email" required placeholder="you@domain.com" class="w-full mt-1 p-2 bg-slate-950 border border-slate-800 rounded text-xs text-white" />
+        </div>
+        <button type="submit" class="w-full py-2.5 mt-2 text-xs font-bold text-white bg-gradient-to-r from-sky-600 to-cyan-500 rounded">
+          Confirm Admission Token
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- JAVASCRIPT: ROBOTIC ARM ENGINE & INTERACTION -->
+  <script>
+    lucide.createIcons();
+
+    // Circuit Background Animation
+    const canvas = document.getElementById('circuit-canvas');
+    if (canvas) {
+      const ctx = canvas.getContext('2d');
+      let w = canvas.width = window.innerWidth;
+      let h = canvas.height = canvas.parentElement.clientHeight || 600;
+      window.addEventListener('resize', () => {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = canvas.parentElement.clientHeight || 600;
+      });
+
+      const dots = Array.from({ length: 35 }, () => ({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        vx: (Math.random() - 0.5) * 0.4,
+        vy: (Math.random() - 0.5) * 0.4
+      }));
+
+      function drawCircuit() {
+        ctx.clearRect(0, 0, w, h);
+        for (let i = 0; i < dots.length; i++) {
+          const d = dots[i];
+          d.x += d.vx; d.y += d.vy;
+          if (d.x < 0) d.x = w; if (d.x > w) d.x = 0;
+          if (d.y < 0) d.y = h; if (d.y > h) d.y = 0;
+
+          ctx.fillStyle = 'rgba(56, 189, 248, 0.4)';
+          ctx.beginPath();
+          ctx.arc(d.x, d.y, 1.5, 0, Math.PI * 2);
+          ctx.fill();
+
+          for (let j = i + 1; j < dots.length; j++) {
+            const d2 = dots[j];
+            const dist = Math.hypot(d.x - d2.x, d.y - d2.y);
+            if (dist < 100) {
+              ctx.strokeStyle = `rgba(56, 189, 248, ${0.15 * (1 - dist / 100)})`;
+              ctx.lineWidth = 0.8;
+              ctx.beginPath();
+              ctx.moveTo(d.x, d.y);
+              ctx.lineTo(d2.x, d2.y);
+              ctx.stroke();
+            }
+          }
+        }
+        requestAnimationFrame(drawCircuit);
+      }
+      drawCircuit();
+    }
+
+    // Robotic Arm Simulation
+    const armCanvas = document.getElementById('arm-canvas');
+    const armCtx = armCanvas ? armCanvas.getContext('2d') : null;
+    let bAngle = 45, sAngle = 30, eAngle = -35, gripperOpen = true;
+
+    function renderArm() {
+      if (!armCanvas || !armCtx) return;
+      const width = armCanvas.width = armCanvas.parentElement.clientWidth;
+      const height = armCanvas.height = 340;
+      const originX = width / 2;
+      const originY = height - 40;
+
+      const l1 = 80, l2 = 65, l3 = 40;
+      const rad1 = -(bAngle * Math.PI) / 180;
+      const rad2 = rad1 - (sAngle * Math.PI) / 180;
+      const rad3 = rad2 - (eAngle * Math.PI) / 180;
+
+      const j0 = { x: originX, y: originY };
+      const j1 = { x: j0.x + l1 * Math.cos(rad1), y: j0.y + l1 * Math.sin(rad1) };
+      const j2 = { x: j1.x + l2 * Math.cos(rad2), y: j1.y + l2 * Math.sin(rad2) };
+      const j3 = { x: j2.x + l3 * Math.cos(rad3), y: j2.y + l3 * Math.sin(rad3) };
+
+      armCtx.clearRect(0, 0, width, height);
+
+      // Pedestal
+      armCtx.fillStyle = '#1e293b';
+      armCtx.fillRect(originX - 35, originY, 70, 20);
+
+      // Links
+      armCtx.strokeStyle = '#38bdf8';
+      armCtx.lineWidth = 7;
+      armCtx.lineCap = 'round';
+      armCtx.beginPath();
+      armCtx.moveTo(j0.x, j0.y); armCtx.lineTo(j1.x, j1.y);
+      armCtx.stroke();
+
+      armCtx.strokeStyle = '#0ea5e9';
+      armCtx.lineWidth = 5;
+      armCtx.beginPath();
+      armCtx.moveTo(j1.x, j1.y); armCtx.lineTo(j2.x, j2.y);
+      armCtx.stroke();
+
+      armCtx.strokeStyle = '#06b6d4';
+      armCtx.lineWidth = 3.5;
+      armCtx.beginPath();
+      armCtx.moveTo(j2.x, j2.y); armCtx.lineTo(j3.x, j3.y);
+      armCtx.stroke();
+
+      // Gripper
+      const span = gripperOpen ? 14 : 5;
+      armCtx.strokeStyle = '#22d3ee';
+      armCtx.lineWidth = 2;
+      armCtx.beginPath();
+      armCtx.moveTo(j3.x - span, j3.y);
+      armCtx.lineTo(j3.x, j3.y);
+      armCtx.lineTo(j3.x + span, j3.y);
+      armCtx.stroke();
+
+      // Tooltip
+      armCtx.font = '11px monospace';
+      armCtx.fillStyle = '#38bdf8';
+      armCtx.fillText(`Tip: X:${(j3.x - originX).toFixed(0)}mm, Y:${(originY - j3.y).toFixed(0)}mm`, 15, 25);
+    }
+
+    renderArm();
+
+    // Sliders
+    const sBase = document.getElementById('slider-base');
+    const sShoulder = document.getElementById('slider-shoulder');
+    const sElbow = document.getElementById('slider-elbow');
+
+    sBase.addEventListener('input', (e) => {
+      bAngle = Number(e.target.value);
+      document.getElementById('val-base').textContent = bAngle + '°';
+      renderArm();
+    });
+    sShoulder.addEventListener('input', (e) => {
+      sAngle = Number(e.target.value);
+      document.getElementById('val-shoulder').textContent = sAngle + '°';
+      renderArm();
+    });
+    sElbow.addEventListener('input', (e) => {
+      eAngle = Number(e.target.value);
+      document.getElementById('val-elbow').textContent = eAngle + '°';
+      renderArm();
+    });
+
+    document.getElementById('btn-gripper').addEventListener('click', () => {
+      gripperOpen = !gripperOpen;
+      renderArm();
+    });
+
+    document.getElementById('btn-reset').addEventListener('click', () => {
+      bAngle = 45; sAngle = 30; eAngle = -35; gripperOpen = true;
+      sBase.value = 45; sShoulder.value = 30; sElbow.value = -35;
+      document.getElementById('val-base').textContent = '45°';
+      document.getElementById('val-shoulder').textContent = '30°';
+      document.getElementById('val-elbow').textContent = '-35°';
+      renderArm();
+    });
+
+    // Routine Macro
+    document.getElementById('btn-automate').addEventListener('click', () => {
+      const routine = [
+        { b: 20, s: 10, e: -20, g: true },
+        { b: 20, s: 60, e: -45, g: false },
+        { b: 60, s: 15, e: -10, g: false },
+        { b: 120, s: 50, e: -30, g: true },
+        { b: 45, s: 30, e: -35, g: true }
+      ];
+      let step = 0;
+      const timer = setInterval(() => {
+        if (step >= routine.length) { clearInterval(timer); return; }
+        const r = routine[step];
+        bAngle = r.b; sAngle = r.s; eAngle = r.e; gripperOpen = r.g;
+        sBase.value = r.b; sShoulder.value = r.s; sElbow.value = r.e;
+        document.getElementById('val-base').textContent = r.b + '°';
+        document.getElementById('val-shoulder').textContent = r.s + '°';
+        document.getElementById('val-elbow').textContent = r.e + '°';
+        renderArm();
+        step++;
+      }, 600);
+    });
+
+    // Modal
+    function openEnrollModal(courseName) {
+      document.getElementById('modal-course-input').value = courseName;
+      const modal = document.getElementById('enroll-modal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+    function closeEnrollModal() {
+      const modal = document.getElementById('enroll-modal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      alert("Application received! Admission Token LWS-2026-" + Math.floor(Math.random() * 89999 + 10000) + " issued.");
+      closeEnrollModal();
+    }
+  </script>
+</body>
+</html>
